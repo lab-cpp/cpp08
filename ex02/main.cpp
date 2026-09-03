@@ -32,10 +32,10 @@ int main() {
         std::cout << *it << " ";
         ++it;
     }
+
     std::cout << std::endl;
     
     std::stack<int> s(mstack);
-
 
     std::cout << "\n--- 2. Testing std::list (Control Group) ---" << std::endl;
     std::list<int> lstack;
