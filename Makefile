@@ -61,6 +61,17 @@ fclean:
 
 re: fclean all
 
+# Apply .clang-format to all .cpp/.hpp files in every exercise directory
+format:
+	@printf "$(CYAN)$(BOLD)▶ Formatting sources...$(RESET)\n"; \
+	files=$$(find $(EXERCISES) -type f \( -name '*.cpp' -o -name '*.hpp' \)); \
+	if [ -z "$$files" ]; then \
+		printf "$(YELLOW)  ⚠ No .cpp/.hpp files found – nothing to format$(RESET)\n"; \
+	else \
+		echo "$$files" | xargs clang-format -i --style=file; \
+		printf "$(GREEN)  ✔ All files formatted$(RESET)\n"; \
+	fi
+
 # List exercises found by the wildcard
 list:
 	@printf "$(BOLD)Exercises in this module:$(RESET)\n"; \
@@ -68,4 +79,4 @@ list:
 		printf "  • $$dir\n"; \
 	done
 
-.PHONY: all test clean fclean re list
+.PHONY: all test clean fclean re list format
