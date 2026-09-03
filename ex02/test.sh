@@ -1,6 +1,6 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────────────────────
-# test.sh – Functional tests for ex00
+# test.sh – Functional tests for ex02
 # ─────────────────────────────────────────────────────────────────────────────
 
 GREEN='\033[0;32m'
@@ -8,7 +8,7 @@ RED='\033[0;31m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-BINARY="./easyfind"
+BINARY="./mutantstack"
 
 PASS=0
 FAIL=0
@@ -30,7 +30,7 @@ assert_eq() {
 }
 
 echo -e "\n${BOLD}══════════════════════════════════════════${NC}"
-echo -e "${BOLD}  Testing ex00${NC}"
+echo -e "${BOLD}  Testing ex02${NC}"
 echo -e "${BOLD}══════════════════════════════════════════${NC}\n"
 
 make > /dev/null 2>&1
@@ -39,21 +39,22 @@ if [ ! -f "$BINARY" ]; then
     exit 1
 fi
 
-EXPECTED_OUTPUT="--- Testing std::vector ---
-Searching for 30...
-Found: 30
-Searching for 99...
-Exception: Item not found in container
+EXPECTED_OUTPUT="--- 1. Testing MutantStack (Subject Test) ---
+Top: 17
+Size: 1
+MutantStack Iteration: 5 3 5 737 0 
 
---- Testing std::list ---
-Searching for 15...
-Found: 15
-Searching for 100...
-Exception: Item not found in container"
+--- 2. Testing std::list (Control Group) ---
+Back (Top): 17
+Size: 1
+std::list Iteration: 5 3 5 737 0"
 
-ACTUAL=$($BINARY 2>&1)
+ACTUAL=$($BINARY 2>&1 | sed 's/[[:space:]]*$//') # Strip trailing spaces for easy comparison
 
-assert_eq "easyfind successfully finds existing items and throws exceptions for missing ones" "$EXPECTED_OUTPUT" "$ACTUAL"
+# Strip trailing spaces from expected output just to be safe
+EXPECTED_OUTPUT=$(echo "$EXPECTED_OUTPUT" | sed 's/[[:space:]]*$//')
+
+assert_eq "MutantStack precisely mimics the behavior of std::list" "$EXPECTED_OUTPUT" "$ACTUAL"
 
 echo ""
 echo -e "${BOLD}══════════════════════════════════════════${NC}"

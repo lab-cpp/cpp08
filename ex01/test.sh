@@ -1,6 +1,6 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────────────────────
-# test.sh – Functional tests for ex00
+# test.sh – Functional tests for ex01
 # ─────────────────────────────────────────────────────────────────────────────
 
 GREEN='\033[0;32m'
@@ -8,7 +8,7 @@ RED='\033[0;31m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-BINARY="./easyfind"
+BINARY="./span"
 
 PASS=0
 FAIL=0
@@ -30,7 +30,7 @@ assert_eq() {
 }
 
 echo -e "\n${BOLD}══════════════════════════════════════════${NC}"
-echo -e "${BOLD}  Testing ex00${NC}"
+echo -e "${BOLD}  Testing ex01${NC}"
 echo -e "${BOLD}══════════════════════════════════════════${NC}\n"
 
 make > /dev/null 2>&1
@@ -39,21 +39,23 @@ if [ ! -f "$BINARY" ]; then
     exit 1
 fi
 
-EXPECTED_OUTPUT="--- Testing std::vector ---
-Searching for 30...
-Found: 30
-Searching for 99...
-Exception: Item not found in container
+EXPECTED_OUTPUT="--- Testing Subject Example ---
+2
+14
 
---- Testing std::list ---
-Searching for 15...
-Found: 15
-Searching for 100...
-Exception: Item not found in container"
+--- Testing Exception: Full Span ---
+Span is already full!
+
+--- Testing Exception: Not Enough Numbers ---
+Not enough numbers to find a span!
+
+--- Testing 10,000 Numbers (Range Iterator) ---
+Shortest span (should be 3): 3
+Longest span (should be 29997): 29997"
 
 ACTUAL=$($BINARY 2>&1)
 
-assert_eq "easyfind successfully finds existing items and throws exceptions for missing ones" "$EXPECTED_OUTPUT" "$ACTUAL"
+assert_eq "Span perfectly tracks min/max, throws exceptions, and handles 10k numbers instantly" "$EXPECTED_OUTPUT" "$ACTUAL"
 
 echo ""
 echo -e "${BOLD}══════════════════════════════════════════${NC}"
