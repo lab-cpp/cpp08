@@ -4,6 +4,8 @@
 #include <numeric>
 #include <stdexcept>
 
+Span::Span() {}
+
 Span::Span(unsigned int n) : _maxSize(n)
 {
     _numbers.reserve(n);
