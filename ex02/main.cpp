@@ -1,10 +1,9 @@
+#include "MutantStack.hpp"
+
 #include <iostream>
 #include <list>
 
-#include "MutantStack.hpp"
-
-int main()
-{
+int main() {
     std::cout << "--- 1. Testing MutantStack (Subject Test) ---" << std::endl;
     MutantStack<int> mstack;
 
@@ -30,8 +29,7 @@ int main()
     --it;
 
     std::cout << "MutantStack Iteration: ";
-    while (it != ite)
-    {
+    while (it != ite) {
         std::cout << *it << " ";
         ++it;
     }
@@ -64,8 +62,7 @@ int main()
     --lit;
 
     std::cout << "std::list Iteration: ";
-    while (lit != lite)
-    {
+    while (lit != lite) {
         std::cout << *lit << " ";
         ++lit;
     }

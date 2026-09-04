@@ -1,11 +1,10 @@
+#include "Span.hpp"
+
 #include <cstdlib>
 #include <iostream>
 #include <vector>
 
-#include "Span.hpp"
-
-int main()
-{
+int main() {
     std::cout << "--- Testing Subject Example ---" << std::endl;
     Span sp = Span(5);
     sp.addNumber(6);
@@ -18,23 +17,17 @@ int main()
     std::cout << sp.longestSpan() << std::endl;
 
     std::cout << "\n--- Testing Exception: Full Span ---" << std::endl;
-    try
-    {
+    try {
         sp.addNumber(42);
-    }
-    catch (std::exception& e)
-    {
+    } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
 
     std::cout << "\n--- Testing Exception: Not Enough Numbers ---" << std::endl;
     Span emptySpan(5);
-    try
-    {
+    try {
         emptySpan.shortestSpan();
-    }
-    catch (std::exception& e)
-    {
+    } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
 
@@ -42,8 +35,7 @@ int main()
     Span massiveSpan(20000);
     std::vector<int> massiveVector;
 
-    for (int i = 0; i < 20000; ++i)
-    {
+    for (int i = 0; i < 20000; ++i) {
         massiveVector.push_back(i * 3);
     }
 

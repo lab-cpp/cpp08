@@ -5,8 +5,7 @@
 #include <iterator>
 #include <vector>
 
-class Span
-{
+class Span {
 private:
     unsigned int _maxSize;
     std::vector<int> _numbers;
@@ -22,24 +21,19 @@ public:
     int shortestSpan() const;
     int longestSpan() const;
 
-    template <typename IT>
-    void addNumber(IT begin, IT end)
-    {
-        if (_numbers.size() + std::distance(begin, end) > _maxSize)
-        {
+    template <typename IT> void addNumber(IT begin, IT end) {
+        if (_numbers.size() + std::distance(begin, end) > _maxSize) {
             throw FullException();
         }
         _numbers.insert(_numbers.end(), begin, end);
     }
 
-    class FullException : public std::exception
-    {
+    class FullException : public std::exception {
     public:
         virtual const char* what() const throw();
     };
 
-    class NotEnoughNumbersException : public std::exception
-    {
+    class NotEnoughNumbersException : public std::exception {
     public:
         virtual const char* what() const throw();
     };

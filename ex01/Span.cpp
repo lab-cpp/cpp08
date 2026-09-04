@@ -4,48 +4,38 @@
 #include <numeric>
 #include <stdexcept>
 
-Span::Span() {}
+Span::Span() {
+}
 
-Span::Span(unsigned int n) : _maxSize(n)
-{
+Span::Span(unsigned int n) : _maxSize(n) {
     _numbers.reserve(n);
 }
 
-Span::~Span()
-{
+Span::~Span() {
 }
 
-Span::Span(const Span& src)
-{
+Span::Span(const Span& src) {
     *this = src;
 }
 
-Span& Span::operator=(const Span& rhs)
-{
-    if (this != &rhs)
-    {
+Span& Span::operator=(const Span& rhs) {
+    if (this != &rhs) {
         this->_maxSize = rhs._maxSize;
         this->_numbers = rhs._numbers;
     }
     return *this;
 }
 
-void Span::addNumber(int number)
-{
-    if (_numbers.size() == _maxSize)
-    {
+void Span::addNumber(int number) {
+    if (_numbers.size() == _maxSize) {
         throw FullException();
-    }
-    else
-    {
+    } else {
         _numbers.push_back(number);
     }
 }
 
-int Span::shortestSpan() const
-{
-    if (_numbers.size() < 2)
-    {
+int Span::shortestSpan() const {
+    if (_numbers.size() < 2) {
         throw NotEnoughNumbersException();
     }
 
@@ -56,22 +46,18 @@ int Span::shortestSpan() const
     return *std::min_element(result.begin() + 1, result.end());
 }
 
-int Span::longestSpan() const
-{
-    if (_numbers.size() < 2)
-    {
+int Span::longestSpan() const {
+    if (_numbers.size() < 2) {
         throw NotEnoughNumbersException();
     }
     return *std::max_element(_numbers.begin(), _numbers.end()) -
            *std::min_element(_numbers.begin(), _numbers.end());
 }
 
-const char* Span::FullException::what() const throw()
-{
+const char* Span::FullException::what() const throw() {
     return "Span is already full!";
 }
 
-const char* Span::NotEnoughNumbersException::what() const throw()
-{
+const char* Span::NotEnoughNumbersException::what() const throw() {
     return "Not enough numbers to find a span!";
 }
