@@ -21,7 +21,7 @@ int main()
 
         std::cout << "Searching for 99..." << std::endl;
         it = ::easyfind(vec, 99);
-        std::cout << "Found: " << *it << std::endl;  // Should not reach here
+        std::cout << "Found: " << *it << std::endl;
     }
     catch (std::exception& e)
     {
@@ -42,7 +42,7 @@ int main()
 
         std::cout << "Searching for 100..." << std::endl;
         it2 = ::easyfind(lst, 100);
-        std::cout << "Found: " << *it2 << std::endl;  // Should not reach here
+        std::cout << "Found: " << *it2 << std::endl;
     }
     catch (std::exception& e)
     {
